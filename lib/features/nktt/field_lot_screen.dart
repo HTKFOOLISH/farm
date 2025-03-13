@@ -39,6 +39,7 @@ class _FieldLotScreenState extends State<FieldLotScreen> {
           title: const Text("Thêm Lô/Trại"),
           content: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: lotCodeController,
@@ -61,6 +62,7 @@ class _FieldLotScreenState extends State<FieldLotScreen> {
                         sowDate == null
                             ? "Chưa chọn ngày gieo"
                             : "Ngày gieo: ${sowDate!.toLocal().toString().split(' ')[0]}",
+                        style: const TextStyle(fontSize: 14),
                       ),
                     ),
                     IconButton(
@@ -138,27 +140,64 @@ class _FieldLotScreenState extends State<FieldLotScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quản lý Lô/Trại (NKTT)'),
+        centerTitle: true,
+        backgroundColor: Colors.green,
       ),
-      body: ListView.builder(
+      backgroundColor: Colors.grey[200],
+      body: _lots.isEmpty
+          ? const Center(
+        child: Text(
+          "Chưa có lô/trại nào được thêm.",
+          style: TextStyle(fontSize: 16),
+        ),
+      )
+          : ListView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         itemCount: _lots.length,
         itemBuilder: (context, index) {
           final lot = _lots[index];
-          return ListTile(
-            title: Text("Lô: ${lot.lotCode}"),
-            subtitle: Text(
-              "Tình trạng: ${lot.status} | Diện tích: ${lot.area} m²\n"
-                  "Ngày gieo: ${lot.sowDate.toLocal().toString().split(' ')[0]}",
+          return Card(
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ActivityScreen(lot: lot)),
-              );
-            },
-            trailing: IconButton(
-              icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () {
-                _deleteLot(lot.id!);
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                  vertical: 12, horizontal: 16),
+              leading: const Icon(
+                Icons.agriculture,
+                color: Colors.green,
+                size: 32,
+              ),
+              title: Text(
+                "Lô: ${lot.lotCode}",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                "Tình trạng: ${lot.status}\nDiện tích: ${lot.area} m²\nNgày gieo: ${lot.sowDate.toLocal().toString().split(' ')[0]}",
+                style: const TextStyle(fontSize: 14),
+              ),
+              trailing: IconButton(
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                  size: 28,
+                ),
+                onPressed: () {
+                  _deleteLot(lot.id!);
+                },
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ActivityScreen(lot: lot),
+                  ),
+                );
               },
             ),
           );
@@ -166,8 +205,10 @@ class _FieldLotScreenState extends State<FieldLotScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addLotDialog,
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.add, size: 32),
       ),
     );
   }
 }
+

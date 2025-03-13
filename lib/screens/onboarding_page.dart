@@ -20,12 +20,15 @@ class OnboardingPage extends StatelessWidget {
                 child: Image.asset('assets/onboarding.png'),
               ),
               const Spacer(),
-              Text('Welcome to Farming Diary App',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+              Text(
+                textAlign: TextAlign.center,
+                'Welcome to Farming Diary App\nCreated by\nHuỳnh Thiện Khải & Võ Văn Hiếu',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)
+              ),
               const Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 30),
                 child: Text(
-                  "Get your agriculture products from the comfort of your home. You're just a few clicks away from your favorite products.",
+                  "\nClick \"Continue with Google\" to use this app.\nEnjoy it 😊",
                   textAlign: TextAlign.center,
                 ),
               ),

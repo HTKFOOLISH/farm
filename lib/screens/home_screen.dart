@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Dòng đầu hiển thị lời chào
-            Text("Hi, Khải Thiện 👋🏿", style: Theme.of(context).textTheme.titleMedium),
+            Text("Hi, there! 👋🏿", style: Theme.of(context).textTheme.titleMedium),
             // Dòng thứ hai hiển thị lời chào mừng
             Text("Welcome to Farming App 🌱", style: Theme.of(context).textTheme.bodySmall),
           ],
